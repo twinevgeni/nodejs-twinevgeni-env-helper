@@ -60,6 +60,11 @@ module.exports = function () {
         return !!value ? stringHelper.stringToBoolean(value) : defaultValue;
     }
 
+    function readNumberEnvValue(value, defaultValue = 0) {
+
+    }
+
+
     /**
      * read value or return default
      * @param {string} valueKey
@@ -86,9 +91,10 @@ module.exports = function () {
         loadEnv: loadEnv,
         loadEnvByName: loadEnvByName,
         loadDefaultEnv: loadDefaultEnv,
-        readEnv: readEnv,
+
         readEnvValue: readEnvValue,
         readBoolEnvValue: readBoolEnvValue,
+
         readEnv: readEnv,
         readBoolEnv: readBoolEnv
     }

@@ -1,16 +1,15 @@
 {
   "name": "twinevgeni-env-helper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Evgenii Izhboldin @twinevgeni",
   "main": "index.js",
   "dependencies": {
     "app-root-path": "^3.0.0",
     "dotenv": "^16.3.1",
-    "twinevgeni-string-helper": "^1.0.2"
+    "twinevgeni-string-helper": "^1.0.8"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "chai-http": "^4.2.1",
     "mocha": "^10.2.0"
   },
   "scripts": {
