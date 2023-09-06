@@ -60,8 +60,14 @@ module.exports = function () {
         return !!value ? stringHelper.stringToBoolean(value) : defaultValue;
     }
 
+    /**
+     * read value or return default
+     * @param value
+     * @param {number} defaultValue
+     * @returns {*|number}
+     */
     function readNumberEnvValue(value, defaultValue = 0) {
-
+        return !!value ? stringHelper.stringToNumber(value) : defaultValue;
     }
 
 
@@ -87,6 +93,16 @@ module.exports = function () {
         return readBoolEnvValue(process.env[valueKey], defaultValue);
     }
 
+    /**
+     * read value or return default
+     * @param {string} valueKey
+     * @param {number} defaultValue
+     * @returns {*|number}
+     */
+    function readNumberEnv(valueKey, defaultValue = 0) {
+        return readNumberEnvValue(process.env[valueKey], defaultValue);
+    }
+
     return {
         loadEnv: loadEnv,
         loadEnvByName: loadEnvByName,
@@ -94,8 +110,10 @@ module.exports = function () {
 
         readEnvValue: readEnvValue,
         readBoolEnvValue: readBoolEnvValue,
+        readNumberEnvValue: readNumberEnvValue,
 
         readEnv: readEnv,
-        readBoolEnv: readBoolEnv
+        readBoolEnv: readBoolEnv,
+        readNumberEnv: readNumberEnv
     }
 }();
