@@ -70,6 +70,17 @@ module.exports = function () {
         return !!value ? stringHelper.stringToNumber(value) : defaultValue;
     }
 
+    /**
+     * read value or return default
+     * @param value
+     * @param {number} radix
+     * @param {number} defaultValue
+     * @returns {number|number}
+     */
+    function readIntEnvValue(value, radix = 10, defaultValue = 0) {
+        return !!value ? parseInt(value, radix) : defaultValue;
+    }
+
 
     /**
      * read value or return default
@@ -103,6 +114,17 @@ module.exports = function () {
         return readNumberEnvValue(process.env[valueKey], defaultValue);
     }
 
+    /**
+     *
+     * @param {string} valueKey
+     * @param {number} radix
+     * @param {number} defaultValue
+     * @return {number}
+     */
+    function readIntEnv(valueKey, radix = 10, defaultValue = 0) {
+        return readIntEnvValue(process.env[valueKey], radix, defaultValue);
+    }
+
     return {
         loadEnv: loadEnv,
         loadEnvByName: loadEnvByName,
@@ -111,9 +133,11 @@ module.exports = function () {
         readEnvValue: readEnvValue,
         readBoolEnvValue: readBoolEnvValue,
         readNumberEnvValue: readNumberEnvValue,
+        readIntEnvValue: readIntEnvValue,
 
         readEnv: readEnv,
         readBoolEnv: readBoolEnv,
-        readNumberEnv: readNumberEnv
+        readNumberEnv: readNumberEnv,
+        readIntEnv: readIntEnv
     }
 }();
