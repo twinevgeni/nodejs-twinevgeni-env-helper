@@ -7,8 +7,7 @@ module.exports = function () {
      * load env vars from envPath
      * @param {string} envPath
      */
-    function loadEnv(envPath)
-    {
+    function loadEnv(envPath) {
         try {
             dotenv.config({path: envPath});
         } catch (error) {
@@ -20,8 +19,7 @@ module.exports = function () {
      * load env vars by envName (in root directory)
      * @param {string} envName
      */
-    function loadEnvByName(envName)
-    {
+    function loadEnvByName(envName) {
         try {
             const envPath = appRoot + '/.' + envName;
             loadEnv(envPath);
@@ -33,8 +31,7 @@ module.exports = function () {
     /**
      * load default env vars (.env file)
      */
-    function loadDefaultEnv()
-    {
+    function loadDefaultEnv() {
         loadEnvByName('env');
     }
 
@@ -44,8 +41,7 @@ module.exports = function () {
      * @param defaultValue
      * @returns {*|null}
      */
-    function readEnvValue(value, defaultValue = null)
-    {
+    function readEnvValue(value, defaultValue = null) {
         return !!value ? value : defaultValue;
     }
 
@@ -55,8 +51,7 @@ module.exports = function () {
      * @param {boolean} defaultValue
      * @returns {boolean}
      */
-    function readBoolEnvValue(value, defaultValue = false)
-    {
+    function readBoolEnvValue(value, defaultValue = false) {
         return !!value ? stringHelper.stringToBoolean(value) : defaultValue;
     }
 
@@ -88,8 +83,7 @@ module.exports = function () {
      * @param defaultValue
      * @returns {*|null}
      */
-    function readEnv(valueKey, defaultValue = null)
-    {
+    function readEnv(valueKey, defaultValue = null) {
         return readEnvValue(process.env[valueKey], defaultValue);
     }
 
@@ -99,8 +93,7 @@ module.exports = function () {
      * @param {boolean} defaultValue
      * @returns {boolean}
      */
-    function readBoolEnv(valueKey, defaultValue = false)
-    {
+    function readBoolEnv(valueKey, defaultValue = false) {
         return readBoolEnvValue(process.env[valueKey], defaultValue);
     }
 
@@ -115,7 +108,7 @@ module.exports = function () {
     }
 
     /**
-     *
+     * read value or return default
      * @param {string} valueKey
      * @param {number} radix
      * @param {number} defaultValue
@@ -123,6 +116,35 @@ module.exports = function () {
      */
     function readIntEnv(valueKey, radix = 10, defaultValue = 0) {
         return readIntEnvValue(process.env[valueKey], radix, defaultValue);
+    }
+
+    /**
+     * @return {null|string[]}
+     */
+    function getEnvKeys() {
+        if (!!process.env) {
+            const keys = Object.keys(process.env);
+            return !!keys ? keys : null;
+        }
+
+        return null;
+    }
+
+    /**
+     * check if key by prefix exists <br>
+     * example: keys:
+     * @param {string} valueKeyPrefix
+     * @return {boolean}
+     */
+    function existsPefixEnv(valueKeyPrefix) {
+        const envKeys = getEnvKeys();
+        if (!!envKeys && envKeys.length > 0) {
+            for (const envKey of envKeys) {
+                if (!!envKey && envKey.startsWith(valueKeyPrefix)) return true;
+            }
+        }
+
+        return false;
     }
 
     return {
@@ -138,6 +160,9 @@ module.exports = function () {
         readEnv: readEnv,
         readBoolEnv: readBoolEnv,
         readNumberEnv: readNumberEnv,
-        readIntEnv: readIntEnv
+        readIntEnv: readIntEnv,
+
+        getEnvKeys: getEnvKeys,
+        existsPefixEnv: existsPefixEnv
     }
 }();
