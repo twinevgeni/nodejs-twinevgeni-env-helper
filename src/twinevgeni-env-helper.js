@@ -136,7 +136,7 @@ module.exports = function () {
      * @param {string} valueKeyPrefix
      * @return {boolean}
      */
-    function existsPefixEnv(valueKeyPrefix) {
+    function existsPrefixEnv(valueKeyPrefix) {
         const envKeys = getEnvKeys();
         if (!!envKeys && envKeys.length > 0) {
             for (const envKey of envKeys) {
@@ -163,6 +163,6 @@ module.exports = function () {
         readIntEnv: readIntEnv,
 
         getEnvKeys: getEnvKeys,
-        existsPefixEnv: existsPefixEnv
+        existsPrefixEnv: existsPrefixEnv
     }
 }();
